@@ -1,23 +1,58 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
 
-char **charSquare(int n);
-void drawCharSquare(char **square, int n);
+using namespace std;
 
-int main(int argc, char **argv)
+char charSquare(char **square,int n); // deklaracja funkcji
+void drawcharSquare(char **square,int n);
+
+int main (int argc, char **argv)
 {
-	int n;
-	drawCharSquare(charSquare(n), n);	
+	int n = atoi(argv[1]);
+	int seed = atoi(argv[2]);
+
+	srand(seed);
+	
+	char **square = new char *[n]; // tablica na wsk
+	for (int i=0; i<n; i++) // generowanie wymiarow
+		square[i] = new char  [n];
+
+	charSquare(square,n);
+	drawcharSquare(square,n);
+
+
+	// zwalnianie pamieci
+	for (int i=0; i<n; i++)
+		delete [] square[i];
+
+	delete [] square;
+
 }
 
-char **charSquare(int n)
+char charSquare(char **square,int n)
 {
-	char **square;
-	return square;
+	for (int i=0; i<n; i++)
+		{
+			for (int j=0;j<n;j++)
+			{
+				square[i][j]=rand()%26+97;
+			}
+		}
+
+	return **square;
+		
 }
 
-void drawCharSquare(char **square, int n)
+void drawcharSquare(char **square,int n)
 {
-
+	for (int i=0; i<n; i++)
+		{
+			for (int j=0;j<n;j++)
+			{
+				cout << square[i][j];
+				cout << " ";
+			}
+			cout << endl;
+		}
 }
